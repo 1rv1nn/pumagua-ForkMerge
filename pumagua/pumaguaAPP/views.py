@@ -108,3 +108,6 @@ def imagenes_bebederos(id_bebedero):
     else:
         ruta = ruta + 'default.png'
     return ruta
+
+def informes(request):
+    return render(request, "informes.html")
