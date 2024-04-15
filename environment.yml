@@ -1,0 +1,14 @@
+name: pumagua
+channels:
+  - defaults
+dependencies:
+  - python=3.10.0
+  - pip:
+    - django==4.1.6
+    - django-crispy-forms==1.14.0 
+    - django-environ==0.9.0
+  - folium=0.14.0
+ 
+
+  
+prefix: /Users/cesarjardines/miniconda3
