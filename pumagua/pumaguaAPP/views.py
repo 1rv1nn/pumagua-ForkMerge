@@ -83,16 +83,36 @@ def index(request):
     else:
         mensaje = 'Mostrando todos los bebederos disponibles en CU.'
         for coordenada in datosBebederos:
-            datos = (coordenada.latitud, coordenada.longitud)
-            folium.Marker(datos,
-                tooltip=coordenada.nombre,
-                popup='<h5><b>'+coordenada.nombre+'</b></h5>\n'
+            if datosBebederos.filter(disponibilidad='1'):
+                datos = (coordenada.latitud, coordenada.longitud)
+                folium.Marker(datos,
+                    tooltip=coordenada.nombre,
+                    popup='<h5><b>'+coordenada.nombre+'</b></h5>\n'
                           +'<h4>Ubicación: '+coordenada.ubicacion+'</h4>'
                           +'<img src="'
                           +imagenes_bebederos(coordenada.id_bebedero)
                           +'" width="150px" style="border-radius: 8px">',
-                icon=folium.Icon(icon='glyphicon glyphicon-tint')).add_to(m)
-
+                    icon=folium.Icon(icon='glyphicon glyphicon-tint')).add_to(m)
+            elif datosBebederos.filter(disponibilidad='0'):
+                datos = (coordenada.latitud, coordenada.longitud)
+                folium.Marker(datos,
+                    tooltip=coordenada.nombre,
+                    popup='<h5><b>'+coordenada.nombre+'</b></h5>\n'
+                          +'<h4>Ubicación: '+coordenada.ubicacion+'</h4>'
+                          +'<img src="'
+                          +imagenes_bebederos(coordenada.id_bebedero)
+                          +'" width="150px" style="border-radius: 8px">',
+                    icon=folium.Icon(color='red',icon='glyphicon glyphicon-tint')).add_to(m)
+            elif datosBebederos.filter(disponibilidad='2'):
+                datos = (coordenada.latitud, coordenada.longitud)
+                folium.Marker(datos,
+                    tooltip=coordenada.nombre,
+                    popup='<h5><b>'+coordenada.nombre+'</b></h5>\n'
+                          +'<h4>Ubicación: '+coordenada.ubicacion+'</h4>'
+                          +'<img src="'
+                          +imagenes_bebederos(coordenada.id_bebedero)
+                          +'" width="150px" style="border-radius: 8px">',
+                    icon=folium.Icon(color='orange',icon='glyphicon glyphicon-tint')).add_to(m)    
     f = folium.Figure(height=500)
     f.add_child(m)
     contexto = {'map': m._repr_html_(),
