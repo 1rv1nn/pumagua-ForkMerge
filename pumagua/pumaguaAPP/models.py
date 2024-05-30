@@ -1,5 +1,7 @@
 from django.db import models
 
+estadoBebedero =(('0','No disponible'),('1','Disponible'),('2','En mantenimiento'))
+
 # Create your models here.
 class bebederos(models.Model):
     id_bebedero = models.AutoField(primary_key = True)
@@ -10,7 +12,7 @@ class bebederos(models.Model):
     descripcion = models.CharField(max_length = 1000, blank = True, default = '')
     latitud = models.FloatField(max_length = 100, blank = True, default = None, null = True)
     longitud = models.FloatField(max_length = 100, blank = True, default = None, null = True)
-
+    estado_bebedero  =  models.CharField(default='1',help_text="EstadoBebeder", max_length=1, choices=estadoBebedero)
     def __str__(self):
         return f'Nombre: {self.nombre} Ubicacion: {self.ubicacion}'
 
